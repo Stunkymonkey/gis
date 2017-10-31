@@ -1,0 +1,69 @@
+\documentclass[12pt,pdftex,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}
+%\usepackage{bbm}
+\usepackage{array}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{hhline}
+\newcommand{\bbN}{\mathbbm{N}}
+\newcommand{\bbR}{\mathbbm{R}}
+\newcommand{\bbZ}{\mathbbm{Z}}
+\newcommand{\bbI}{\mathbbm{I}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\lstset{language=Python,basicstyle=\footnotesize}
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\begin{document}
+\title{ Grundlagen der Informationssicherheit/Datensicherheit,\\ Blatt 1}
+\author{Lukas Baur, 3131138\\
+		Felix Bühler, 2973410\\
+		Marco Hildenbrand, 3137242}
+\maketitle
+\section*{Problem 1}
+\subsection*{a)}
+%TODO
+% hier weiß ich nicht ganz wie man den Spaß angeben soll.
+Ja.
+\subsection*{b)}
+Ja. Da hier aber 'c' immer eindeutig auf 'C' gemapped wird, ist dies kein sicheres Verschlüsselungsschema.
+\subsection*{c)}
+Nein. Hier besteht ein großes Problem, egal welcher Key = $ K_X $ gewählt wird, wird es immer ein Problem mit 'a' oder 'c' geben. Wenn die Daten verschlüsselt werden, werden beide auf den selben Buchstaben gemapped. Beim entschlüsseln hat man das Problem, dass man nicht exakt weiß welcher Buchstabe ursprünglich an dieser Stelle war. Es ist also nicht möglich, die Daten wieder exakt herzustellen, wie sie früher waren.
+
+\section*{Problem 2}
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{llllllllllll}
+		y = &  & 96 & c4 & ca & 8c & 4b & 2a & 7e & 79 & c5 & 8c \\
+		k = & $ \oplus $ & de & ad & be & ef & 23 & 42 & 17 & 12 & a0 & fe \\ \hline
+		x = &  & 48 & 69 & 74 & 63 & 68 & 68 & 69 & 6b & 65 & 72
+	\end{tabular}
+\end{table}
+ASCII (Base 256) = Hitchhiker
+
+\section*{Problem 3}
+\subsection*{a)}
+\begin{lstlisting}
+function D(y, k)
+	y1 = y[l, 2l-1]
+	x = y1 XOR 1^l
+	return x;
+end function
+\end{lstlisting}
+
+\subsection*{b)}
+
+\end{document}
+
+
