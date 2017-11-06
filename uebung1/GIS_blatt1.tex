@@ -33,13 +33,32 @@
 \maketitle
 \section*{Problem 1}
 \subsection*{a)}
-%TODO
-% hier weiß ich nicht ganz wie man den Spaß angeben soll.
-Ja.
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		D(x, k) & A & B & C \\ \hline
+		$ K_1 $ & a  & b  & c  \\ \hline
+		$ K_2 $ & c  & a  & b  \\ \hline
+		$ K_3 $ & b  & c  & a  \\ \hline
+	\end{tabular}
+\end{table}
+
 \subsection*{b)}
-Ja. Da hier aber 'c' immer eindeutig auf 'C' gemapped wird, ist dies kein sicheres Verschlüsselungsschema.
+Ja. Da hier aber 'c' immer eindeutig auf 'C' gemapped wird, ist dies kein sicheres Verschlüsselungsschema. Gleichzeitig sind $ K_1 $ und $ K_3 $ indentische Keys.
+\begin{table}[!ht]
+	\centering
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		D(x, k) & A & B & C \\ \hline
+		$ K_1 $ & a  & b  & c  \\ \hline
+		$ K_2 $ & b  & a  & c  \\ \hline
+		$ K_3 $ & a  & b  & c  \\ \hline
+	\end{tabular}
+\end{table}
+
 \subsection*{c)}
-Nein. Hier besteht ein großes Problem, egal welcher Key = $ K_X $ gewählt wird, wird es immer ein Problem mit 'a' oder 'c' geben. Wenn die Daten verschlüsselt werden, werden beide auf den selben Buchstaben gemapped. Beim entschlüsseln hat man das Problem, dass man nicht exakt weiß welcher Buchstabe ursprünglich an dieser Stelle war. Es ist also nicht möglich, die Daten wieder exakt herzustellen, wie sie früher waren.
+Nein. Hier besteht ein großes Problem, egal welcher Key = $ K_X $ gewählt wird, wird es immer ein Problem mit 'a' oder 'c' geben. Wenn die Daten verschlüsselt werden, werden beide auf den selben Buchstaben gemapped. Beim entschlüsseln hat man das Problem, dass man nicht exakt weiß welcher Buchstabe ursprünglich an dieser Stelle war. Es ist also nicht möglich, die Daten wieder exakt herzustellen, wie sie früher waren. D ist hier nicht injektiv.
 
 \section*{Problem 2}
 \begin{table}[!ht]
@@ -56,13 +75,33 @@ ASCII (Base 256) = Hitchhiker
 \subsection*{a)}
 \begin{lstlisting}
 function D(y, k)
-	y1 = y[l, 2l-1]
+	y1 = y(l)y(l+1)...y(2l-1)
 	x = y1 XOR 1^l
 	return x;
 end function
 \end{lstlisting}
 
+$ \\
+\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}:
+D(E(x, k), k) = x\\~\\
+D((r \oplus k || x \oplus 1^l), k) = x\\
+(x \oplus 1^l) \oplus 1^l = x\\
+x \oplus 0^l = x\\
+x = x $
+$ \square $
+\\
+
 \subsection*{b)}
+Bei der Verschlüsselung wird nur die Nachricht invertiert und mit einem 'zufälligen' Bitstring(vorne) aufgefüllt. Eine Invertierung ist keine Verschlüsselung.
+\\~\\
+Game:
+\begin{enumerate}
+	\item Definiere $ Z_0 := 1^l$\\
+		Definiere $ Z_1 := 0^l$
+	\item Sende an Alice $ (Z_0, Z_1) $ und erhalte $ c $
+	\item  $ Z_0' := $Verschlüssele $ Z_0 $ von Alice
+	\item Vergleiche die letzen l bits von $ Z_0' $ und $ c $  bei Gleichheit gib 0 zurück, ansonsten 1.
+\end{enumerate}
 
 \end{document}
 
