@@ -1,0 +1,241 @@
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{amssymb}
+\usepackage{colortbl}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.55in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\rhead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle} % Top right header
+\chead{} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Aufgabe \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{\"{U}bungsblatt \#2} % Assignment title
+\newcommand{\hmwkDueDate}{Dienstag,\ November\ 21,\ 2017} % Due date
+\newcommand{\hmwkClass}{Grundlagen der Informationssicherheit\ WS 2017/2018} % Course/class
+\newcommand{\hmwkClassTime}{} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{Gruppenabgabe} % Teacher/lecturer
+\newcommand{\hmwkAuthorName}{Lukas Baur, \linebreak Felix B\"{u}hler, \linebreak Marco Hildenbrand} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+%\newpage
+%\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	Aufgabe 1
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+
+\textbf{Getting the code $(a,b)$} \\ 
+Als erstes sendet der Angreifer eine Anfrage zum verschl\"{u}sseln von 0 (also E(0,(a,b)). Zur\"{u}ckgegeben wird demnach:\
+$E(x,(a,b)) = E(x,(a,b)) = (0*a) +_n b = b $. \\
+Im Anschluss sendet der Angreifer eine Anfrage zum Verschl\"{u}sseln von 1. Es gilt offensichtlich:\\
+
+$E(x,(a,b)) = E(1,(a,b)) = (1*a) +_n b = a +_n b$
+Nun kann a leicht bestimmt werden, da E(1,(a,b)) sowie b bekannt ist. (a berechnet sich aus $E(1,(a,b)) - b$ bzw. $n + (E(1,(a,b)) - b$) falls  \textit{$E(1,(a,b)) - b$} negativ ist.)\\
+
+
+\textbf{Win the game with advantage = 1 } \\ 
+Da der Schl\"{u}ssel $(a,b)$ nun bekannt ist, kann trivialerweise jeder Cifer-Text damit entschl\"{u}sselt werden. \\
+Dass der advantage demzufolge bei 1 liegt, d\"{u}rfte offensichtlich sein.\\Da der Angreifer den Code nun dechiffrieren kann, kann er das Tupel $(z_0 , z_1)$ senden und erh\"{a}lt $z_i =: c$.\\
+Er verschl\"{u}sselt nun (ggf. eigenst\"{a}ndig) $z_0$ und $z_1$. Nun kann er vergleichen ob E($z_0$ , $(a,b)$) = $c$ gilt. Falls ja, so war $i=0$, sonst $i = 1.$
+\\
+Alternativ entschl\"{u}sselt er $c$ mit $(a,b)$ und erh\"{a}lt $z_0$ oder $z_1$ und entscheidet entsprechend.\\\\
+
+
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Aufgabe 2
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+\textbf{Aufgabe 2.1} \\
+s
+ \\\\\\
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Aufgabe 3
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+Wir schreiben um:  \\
+$a = p_1 + r_1 $ mit $0 \leq r1 < n$ und $p_1 =  k * n, k \in \mathrm{N}$ und demnach offensichtlich $r_1 = a$ mod $n$
+\\
+$b = p_2 + r_2 $ mit $0 \leq r2 < n$ und $p_2 =  \tilde{k} * n, \tilde{k} \in \mathrm{N}$ und demnach offensichtlich $r_2 = b$ mod $n$\\
+\\Dann gilt:
+$(a * b)$ mod $n \\= (p_1 + r_1)* ( p_2 + r_2)$ mod $n \\= (p_1 p_2 + r_1 p_2 + p_1 r_2 + r_1 r_2 )$ mod $n \\=
+p_1 p_2 $ mod $n  + r_1 p_2 $ mod $n  + p_1 r_2 $ mod $n  + r_1 r_2 $ mod $n  \\= $
+$k n \tilde{k}n $ mod $n  + r_1 n\tilde{k} $ mod $n  + k n r_2 $ mod $n  + r_1 r_2 $ mod $n  \\= 
+0  + 0 + 0 + r_1 r_2 $ mod $n  \\= $
+$ r_1 r_2 $ mod $n$
+$\\= (a $ mod $ n)(b $ mod $ n)$mod $n$ \textit{(nach Definition)}
+\\$\square$
+
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Aufgabe 4
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+Da $(R, +, *)$ ein kommutativer Ring ist, gilt:
+\begin{list}{•}{•}
+\item $(R, +, *)$ ist assoziativ
+\item in $(R, +, *)$ existiert ein neutrales Element e bzg. der Multiplikation
+\item $(R, +, *)$ ist distributiv
+\item $(R, +, *)$ ist kommutativ bez\"{u}glich *.
+\end{list}
+
+$R^{*}$ ist nun definiert als die Menge aller invertierbaren Elemente aus $(R, +, *)$. \\
+\\
+$\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}$: 
+\begin{enumerate}
+\item $(x*y)*z = x*(y*z) \forall x,y,z \in R^{*}$
+\item $\exists x^{-1} \in R^{*}: x*x^{-1} = x^{-1}*x = e, \forall x\in R^{*}$
+\item $\exists e \in R^{*}: x*e = e*x = x, \forall x\in R^{*}$.
+\end{enumerate}
+
+1. Da $R^{*} \subseteq R$ ist, gilt (1) offensichtlich immer noch.\\\\
+2. Nach Voraussetzung besteht $R^{*}$ nur aus invertierbaren Elementen, also existiert auch ein Inverses $e$ in $R^{*}$:\\
+Sei $x$ invertierbar in $R^{*}$, dann existiert ein  $x^{-1} \in R^{*}$, das dessen Inverse bildet (nach Definition von $R^{*}$). Da $e*e^{-1} = e^{-1}*e = 1 \Leftrightarrow e^{-1} = e$. Da $e \in R$ war, und offensichtlich invertierbar ist, so ist es auch $\in R^{*}$
+\\\\
+3. Da $(R, +, *)$ ist kommutativ bez\"{u}glich * war, und f\"{u}r jedes y $\in R $ ein neutrales Element existiert, so gilt auch $x*e = e*x = x, \forall x\in R^{*}$ sofern, dieses $e$ auch in $R^{*}$ vorhanden ist. Dies ist gem\"{a}\ss \ (2) erf\"{u}llt.
+
+Also erf\"{u}llt $(R^{*}, *)$ alle Gruppenaxiome. $\square$
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Aufgabe 5
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+
+\end{homeworkProblem}
+
+%----------------------------------------------------------------------------------------
+%	Aufgabe 6
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}
+ExtendedEuclid(32,51):\\
+\begin{tabular}{c|c|c|c|c|c|c|c}
+ 
+$a'$ & $b'$ & $x_0$ & $y_0$ & $x_1$ & $y_1$ & $q$ & $r$ \\ 
+\hline 
+32 & 51 & 1 & 0 &  \cellcolor{green}0 & \cellcolor{red}1 & 0 & \cellcolor{blue}32 \\ 
+\hline 
+51 & \cellcolor{blue}32 & \cellcolor{green}0 & \cellcolor{red}1 & \cellcolor{green}1 & \cellcolor{red}0 & 1 & \cellcolor{blue}19 \\  
+\hline 
+32 & \cellcolor{blue}19 & \cellcolor{green}1 & \cellcolor{red}0 & \cellcolor{green}-1 & \cellcolor{red}1 & 1 & \cellcolor{blue}13 \\  
+\hline 
+19 & \cellcolor{blue}13 & \cellcolor{green}-1 & \cellcolor{red}1 & \cellcolor{green}2 & \cellcolor{red}-1 & 1 & \cellcolor{blue}6 \\  
+\hline 
+13 & \cellcolor{blue}6 & \cellcolor{green}2 & \cellcolor{red}-1 & \cellcolor{green}-3 & \cellcolor{red}2 & 2 & \cellcolor{blue}1\\   
+\hline 
+6 & \cellcolor{blue}1 & \cellcolor{green}-3 & \cellcolor{red}2 & \cellcolor{green}8 & \cellcolor{red}-5 & 6 & \cellcolor{blue}0 \\   
+\hline 
+1 & \cellcolor{blue}0 & \cellcolor{green}8 & \cellcolor{red}-5 & -51 & 32 & • & • \\
+\end{tabular} 
+\\
+\\$1 = 8*32 + (-5)*51$\\
+$32^{-1} =_{51} 8$\\
+$32^{-1} * 32 $ mod $51 = 8*32$ mod $ 51 = 256 $ mod $51 = 1$
+$\square$ 
+
+\end{homeworkProblem}
+\end{document}
