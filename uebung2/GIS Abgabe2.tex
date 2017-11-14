@@ -7,6 +7,11 @@
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 \usepackage{amssymb}
 \usepackage{colortbl}
+\usepackage{amsmath}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 
 
 % Margins
@@ -205,7 +210,24 @@ Also erf\"{u}llt $(R^{*}, *)$ alle Gruppenaxiome. $\square$
 %	Aufgabe 5
 %----------------------------------------------------------------------------------------
 \begin{homeworkProblem}
-1. Hallo dies ist ein Test
+
+$ ggT(a, b) := d\\
+ggT(b, a \mod b) := e $\\
+$\mathrm{Z\kern-.3em\raise-0.5ex\hbox{Z}}$: d = e\\
+Hilfssatz:\\
+$ d | a \land d | b\\
+q = \floor*{\frac{a}{b}}\\
+a \mod b = a - qb$\\
+also: $ d | (a-qb) $ Lemma Linearkombination\\
+also $ d | (a \mod b) $\\
+da $ d | a \mod b \land d | b $\\
+$ \Rightarrow d | e $\\~\\
+$ e = ggT(b, a \mod b) \Rightarrow e | b$ und $ e | a \mod b $\\
+$ \Rightarrow e | (a \mod b - qb) $\\
+$ \Rightarrow e | a $\\
+$ \Rightarrow e | ggT(a, b) = d $\\
+$ \Rightarrow e | d $\\
+$ \Rightarrow e | d \land d | e \Leftrightarrow e = d $
 \end{homeworkProblem}
 
 %----------------------------------------------------------------------------------------
