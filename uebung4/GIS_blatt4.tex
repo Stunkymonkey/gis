@@ -25,11 +25,149 @@
 \maketitle
 \section*{Problem 1: BGP}
 \subsection*{(a)}
-a
+In our case: if paths have the same length, we will use the one with lower AS-number.
 
+\begin{table}[!ht]
+	\centering
+	\caption{AS1}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                               & via           \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}1.2.3.0/24\\ 17.9.8.0/25\end{tabular} & -             \\ \hline
+		2  & 5.2.0.0/16                                                       & AS2           \\ \hline
+		3  & 92.18.2.0/24                                                     & AS3           \\ \hline
+		4  & 18.2.1.0/26                                                      & AS2, AS4      \\ \hline
+		5  & 80.90.42.0/24                                                    & AS2, AS4, AS5 \\ \hline
+		6  & 15.23.2.0/24                                                     & AS3, AS6      \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+	\centering
+	\caption{AS2}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                               & via      \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}1.2.3.0/24\\ 17.9.8.0/25\end{tabular} & AS1      \\ \hline
+		2  & 5.2.0.0/16                                                       & -        \\ \hline
+		3  & 92.18.2.0/24                                                     & AS3      \\ \hline
+		4  & 18.2.1.0/26                                                      & AS4      \\ \hline
+		5  & 80.90.42.0/24                                                    & AS4, AS5 \\ \hline
+		6  & 15.23.2.0/24                                                     & AS3, AS6 \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+	\centering
+	\caption{AS3}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                               & via      \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}1.2.3.0/24\\ 17.9.8.0/25\end{tabular} & AS1      \\ \hline
+		2  & 5.2.0.0/16                                                       & AS2      \\ \hline
+		3  & 92.18.2.0/24                                                     & -        \\ \hline
+		4  & 18.2.1.0/26                                                      & AS4      \\ \hline
+		5  & 80.90.42.0/24                                                    & AS4, AS5 \\ \hline
+		6  & 15.23.2.0/24                                                     & AS6      \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+	\centering
+	\caption{AS4}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                               & via      \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}1.2.3.0/24\\ 17.9.8.0/25\end{tabular} & AS2, AS1 \\ \hline
+		2  & 5.2.0.0/16                                                       & AS2      \\ \hline
+		3  & 92.18.2.0/24                                                     & AS3      \\ \hline
+		4  & 18.2.1.0/26                                                      & -        \\ \hline
+		5  & 80.90.42.0/24                                                    & AS5      \\ \hline
+		6  & 15.23.2.0/24                                                     & AS6      \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+	\centering
+	\caption{AS5}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                               & via           \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}1.2.3.0/24\\ 17.9.8.0/25\end{tabular} & AS4, AS2, AS1 \\ \hline
+		2  & 5.2.0.0/16                                                       & AS4, AS2      \\ \hline
+		3  & 92.18.2.0/24                                                     & AS4, AS3      \\ \hline
+		4  & 18.2.1.0/26                                                      & AS4           \\ \hline
+		5  & 80.90.42.0/24                                                    & -             \\ \hline
+		6  & 15.23.2.0/24                                                     & AS6           \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+	\centering
+	\caption{AS6}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                               & via      \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}1.2.3.0/24\\ 17.9.8.0/25\end{tabular} & AS3, AS1 \\ \hline
+		2  & 5.2.0.0/16                                                       & AS3, AS2 \\ \hline
+		3  & 92.18.2.0/24                                                     & AS3      \\ \hline
+		4  & 18.2.1.0/26                                                      & AS4      \\ \hline
+		5  & 80.90.42.0/24                                                    & AS5      \\ \hline
+		6  & 15.23.2.0/24                                                     & -        \\ \hline
+	\end{tabular}
+\end{table}
+
+\newpage~\newpage
 \subsection*{(b)}
-a
+Only showing the changed tables. Changes are \underline{underlined}.
 
+\begin{table}[!ht]
+	\centering
+	\caption{AS4'}
+	\label{my-label}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                                 & via      \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}\sout{1.2.3.0/24}\\ 17.9.8.0/25\end{tabular} & AS2, AS1 \\ \hline
+		2  & 5.2.0.0/16                                                         & AS2      \\ \hline
+		3  & 92.18.2.0/24                                                       & AS3      \\ \hline
+		4  & 18.2.1.0/26                                                        & -        \\ \hline
+		5  & \begin{tabular}[c]{@{}l@{}}80.90.42.0/24\\ \underline{1.2.3.0/24}\end{tabular} & AS5      \\ \hline
+		6  & 15.23.2.0/24                                                       & AS6      \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+	\centering
+	\caption{AS5'}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                               & via           \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}\sout{1.2.3.0/24}\\ 17.9.8.0/25\end{tabular} & AS4, AS2, AS1 \\ \hline
+		2  & 5.2.0.0/16                                                       & AS4, AS2      \\ \hline
+		3  & 92.18.2.0/24                                                     & AS4, AS3      \\ \hline
+		4  & 18.2.1.0/26                                                      & AS4           \\ \hline
+		5  & \begin{tabular}[c]{@{}l@{}}80.90.42.0/24\\ \underline{1.2.3.0/24}\end{tabular} & AS5      \\ \hline
+		6  & 15.23.2.0/24                                                     & AS6           \\ \hline
+	\end{tabular}
+\end{table}
+
+\begin{table}[!ht]
+	\centering
+	\caption{AS6'}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		AS & IP                                                               & via      \\ \hline
+		1  & \begin{tabular}[c]{@{}l@{}}\sout{1.2.3.0/24}\\ 17.9.8.0/25\end{tabular} & AS3, AS1 \\ \hline
+		2  & 5.2.0.0/16                                                       & AS3, AS2 \\ \hline
+		3  & 92.18.2.0/24                                                     & AS3      \\ \hline
+		4  & 18.2.1.0/26                                                      & AS4      \\ \hline
+		5  & \begin{tabular}[c]{@{}l@{}}80.90.42.0/24\\ \underline{1.2.3.0/24}\end{tabular} & AS5      \\ \hline
+		6  & 15.23.2.0/24                                                     & -        \\ \hline
+	\end{tabular}
+\end{table}
+
+\newpage
 \section*{Problem 2: Network Trace}
 \subsection*{(a)}
 a
