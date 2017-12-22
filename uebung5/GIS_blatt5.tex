@@ -1,0 +1,102 @@
+\documentclass[12pt,pdftex,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage{bbm}
+\usepackage{array}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\lstset{language=Python,basicstyle=\footnotesize}
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+
+\begin{document}
+\title{ Grundlagen Informationsicherheit und Datensicherheit,\\ Blatt 5}
+\author{Lukas Baur, 3131138\\
+		Felix Bühler, 2973410\\
+		Marco Hildenbrand, 3137242}
+\maketitle
+\section*{Problem 1: Firewalls with nftables}
+\subsection*{(a)}
+
+
+\newpage
+\section*{Problem 2: Web of Trust and PGP}
+\subsection*{(a)}
+
+\begin{verbatim}
+key 05CC90595550B319: public key "Alice <alice@wonderland.org>"
+was signed by:
+Flash <flash@starlabs.com>,
+Hulk_ <hulk@biggreen.cc>,
+Eve__ <eve@evilgenius.net>
+
+key 17AADF4E9291BD4A: public key "Bob__ <bob@krustykrab.com>"
+was signed by:
+Alice <alice@wonderland.org>,
+Derpy <derpy@ponymail.com>,
+Flash <flash@starlabs.com>
+
+key 40E9917DFCE86AEA: public key "Charlie <charlie@moderntimes.com>"
+was signed by:
+Bob__ <bob@krustykrab.com>,
+Eve__ <eve@evilgenius.net>,
+Alice <alice@wonderland.org>
+
+key 8889FDFC1248AE44: public key "Derpy <derpy@ponymail.com>"
+was signed by:
+Hulk_ <hulk@biggreen.cc>,
+Charlie <charlie@moderntimes.com>,
+Alice <alice@wonderland.org>
+
+key 7EAAC9BE837250A6: public key "Eve__ <eve@evilgenius.net>"
+was signed by:	none
+
+key 0D789E34A52F024F: public key "Flash <flash@starlabs.com>"
+was signed by:
+Derpy <derpy@ponymail.com>,
+Charlie <charlie@moderntimes.com>
+
+key C2DFB3AD67855F6E: public key "Hulk_ <hulk@biggreen.cc>"
+was signed by:
+Eve__ <eve@evilgenius.net>,
+Bob__ <bob@krustykrab.com>,
+Flash <flash@starlabs.com>
+
+key 0CA5C63A31C0D0C9: public key "Garfield <garfield@catnip.com>"
+was signed by:	Eve__ <eve@evilgenius.net>
+\end{verbatim}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=1\linewidth]{problem-2}
+\end{figure}
+
+
+\subsection*{(b)}
+Messages:
+\begin{itemize}
+	\item msg0 good signature by Garfield $ <garfield@catnip.com> $
+	\item msg1 good signature by Hulk\_ $ <hulk@biggreen.cc> $
+	\item msg2 bad signature by Flash $ <flash@starlabs.com> $
+	\item msg3 good signature by Derpy $ <derpy@ponymail.com> $
+	\item msg4 good signature by Eve\_\_ $ <eve@evilgenius.net> $
+\end{itemize}
+\leavevmode
+~\\is Alice trustings:
+\begin{itemize}
+	\item msg0 no
+	\item msg1 yes, because of Alice $ \rightarrow $ Bob\_\_ $ \rightarrow $ Hulk\_
+	\item msg2 yes, because of Alice $ \rightarrow $ Derpy $ \rightarrow $ Flash
+	\item msg3 yes, because of Alice $ \rightarrow $ Derpy
+	\item msg4 no
+\end{itemize}
+
+\end{document}
