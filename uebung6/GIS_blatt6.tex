@@ -1,0 +1,74 @@
+\documentclass[10pt,pdftex,a4paper]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage{bbm}
+\usepackage{array}
+\usepackage{marvosym}
+\usepackage{color}
+\usepackage{hhline}
+\usepackage[pdftex]{graphicx}
+\usepackage{listings}
+\lstset{language=Python,basicstyle=\footnotesize}
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{hyperref}
+\usepackage{extarrows}
+
+\usepackage{rotating}
+\begin{document}
+\title{ Grundlagen Informationsicherheit und Datensicherheit,\\ Blatt 6}
+\author{Lukas Baur, 3131138\\
+		Felix Bühler, 2973410\\
+		Marco Hildenbrand, 3137242}
+\maketitle
+\section*{Problem 1}
+\subsection*{(a)}
+
+
+\newpage
+\section*{Problem 2:}
+\subsection*{(a)}
+
+
+\newpage
+\section*{Problem 3}
+\begin{sidewaystable}
+\begin{tabular}{|c|c|c|c|c|}
+C &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$  & E &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$   & S \\ 
+
+C &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{E}(k_{E})}$ & E &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{S}(k_{S})}$ & S \\ 
+
+C &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{E}}(PMS)}$  & E &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS)}$  & S \\ 
+
+C &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake_{CE}))}$  & E &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake_{ES}))}$  & S \\ 
+
+C &  $\xlongleftarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake_{EC}))}$ & E &  $\xlongleftarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake_{SE}))}$ & S \\ 
+ & • &  & • &  \\ 
+ & • &  & • &  \\ 
+ & • &  & • &  \\ 
+C & \textit{Session beendet} & E & \textit{Session beendet} & S \\ 
+\end{tabular} 
+\\\\
+\\
+\begin{tabular}{|c|c|c|c|c|}
+C &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$  & E &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$   & S \\ 
+
+C &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{C}(k_{S})}$ & E &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{C}(k_{S})}$ & S \\ 
+
+C &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS)}$  & E &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS')}$  & S \\ 
+
+C &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake))}$  & E &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake))}$  & S \\ 
+
+C &  $\xlongrightarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake'))}$ & E &  $\xlongrightarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake'))}$ & S \\ 
+C & • & E & • & S \\ 
+C & • & E & • & S \\ 
+C & • & E & • & S \\ 
+C & \textit{Session beendet} & E & \textit{Session beendet} & S \\ 
+\end{tabular} 
+\end{sidewaystable}
+
+\end{document}
