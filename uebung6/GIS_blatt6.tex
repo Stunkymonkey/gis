@@ -129,8 +129,24 @@ Der Angreifer E lässt C hier im Glauben eine Verbindung mit Server S aufgebaut 
 \clearpage
 
 \section*{Problem 4: Attack on IKEv1 Main Mode}
-Reflection attack:
 
-Der Angriff ist eine einfache Reflexion, die erfordert, dass ein Initiator seine eigene Identität als Gleichrangigen-Peer akzeptiert. In diesem Fall werden die Authentifizierer in dem Protokoll gleich und der Gegner sendet einfach alle Nachrichten, die von dem Initiator kommen, unverändert an sie zurück. In diesem Fall schlägt die schwache Vereinbarung fehl, da kein Agent die Responder-Rolle ausführt. Die Geheimhaltung des Schlüssels ist weiterhin gewährleistet. Wenn eine Selbstkommunikation nicht möglich ist, ist der aufgezeigte Angriff nicht mehr möglich.
+Die dritte Nachricht in diesem Protokoll enthält keine Information über den wahren Empfänger. Der Empfänger weiß demnach nicht sicher, ob die Nachricht für ihn bestimmt war. Mittels einer Authentifizierung zu Beginn könnte das Problem behoben werden.\\
+Die Attacke läuft ähnlich zu der vorgestellten Methode aus der Vorlesung (Brute-Forcing)
+\\
+
+\begin{tabular}{|c|c|c|c|c|}
+		C &  $\xlongrightarrow{(N_{I}^{(1)}, \bot), SA_{I}}$  & E &  $\xlongrightarrow{(N_{I}^{(1)}, \bot), SA_{I}}$ & S \\ 
+		
+			C &  $\xlongleftarrow{(N_{I}^{(1)}, N_{R}^{(1)}), SA_{R}}$  & E &  $\xlongleftarrow{(N_{I}^{(1)}, N_{R}^{(1)}), SA_{R}}$ & S \\ 
+				C &  $\xlongrightarrow{(N_{I}^{(1)}, N_{R}^{(1)}), DH_{I},N_{I}^{(2)}}$  & E &   $\xlongrightarrow{(N_{I}^{(1)}, N_{R}^{(1)}), DH_{E},N_{I}^{(2)}}$& S \\ 
+				
+		C &  $\xlongleftarrow{(N_{I}^{(1)}, N_{R}^{(1)}), DH_{E'},N_{I}^{(2)}}$  & E &  $\xlongleftarrow{(N_{I}^{(1)}, N_{R}^{(1)}), DH_{R},N_{I}^{(2)}}$ & S \\ 
+		
+		& • &  & • &  \\ 
+		& • &  & • &  \\ 
+		
+	\end{tabular}
+\\\\\\\\
+$k1$ ist hierdurch bekannt. $k2$ kann durch Brute-Force herausgefunden werden. 
 
 \end{document}
