@@ -25,8 +25,10 @@
 	Felix Bühler, 2973410\\
 	Marco Hildenbrand, 3137242}
 
+
 \begin{document}
 \maketitle
+\pagebreak
 \section*{Problem 1: Protocol for Mutual Authentication}
 Reflection attack:\\
 Eine Person, die $ N_B $ korrekt entschlüsselt hat, ist jemand, der den KEY kennt (Alice). Allerdings kennt Bob selbst den KEY auch! Der Angreifer kann also die gesendeten Nachrichten auzeichnen und später nochmal senden und sich damit als Alice ausgeben.
@@ -45,11 +47,51 @@ E = Evil (= Attacker)
 	\item Verbindung 2: A $ \rightarrow $ E \tab : $ N_A' $
 \end{enumerate}
 
+\pagebreak
 \section*{Problem 2: Kerberos}
 
+Im folgenden gehen wir von folgender Anfangssituation aus:\\
+\begin{tabular}{|c|c|c|c|c|}
+C &  $\xlongrightarrow{cert_{C}, sig_{\hat{k}_{C}}(t_{C}, n_{2}), C, TGS, n_{1}}$  & E & $\xlongrightarrow{cert_{E}, sig_{\hat{k}_{E}}(t_{C}, n_{2}), E, TGS, n_{1}}$   & KAS \\ 
+\end{tabular} 
+
+\subsection*{(a)}
+Die Vorgestellte Idee stellt \textbf{keine} sichere Lösung dar: \\\\
+Bei einem MitM sendet der Server unter anderem $enc_{k}^{s}(AK, n_{1}, t_{KAS}, TGS, E)$ zurück. Diesen Teil kann E enschlüsseln ( mit dem Key $k$, den er auch bekommt) und sendet dann die substituierte Nachricht zurück:\\
+\begin{tabular}{|c|c|c|}
+E & 
+$\xlongleftarrow{enc_{k_{E}}^{a}(cert_{KAS}, sig_{\hat{k}_{KAS}}(k,n_{2})), E , TGT, enc_{k}^{s}(AK, n_{1}, t_{KAS}, TGS, E) } $
+ & KAS 
+\end{tabular} 
+\\\\\\
+\begin{tabular}{|c|c|c|}
+C & 
+
+$\xlongleftarrow{enc_{k_{C}}^{a}(cert_{KAS}, sig_{\hat{k}_{KAS}}(k,n_{2})), C , TGT, enc_{k}^{s}(AK, n_{1}, t_{KAS}, TGS, C) } $ & E 
+\end{tabular} 
+
+\subsection*{(b)}
+Die Vorgestellte Idee stellt eine \textbf{sichere Lösung} dar: \\\\
+Der Name, für den der TGT bereitgestellt wird, wird von KAS-Server mit dessen privaten Schlüssels verschlüsselt. Diese Signatur kann E nicht fälschen.
+\subsection*{(c)}
+Die Vorgestellte Idee stellt \textbf{keine} sichere Lösung dar: \\\\
+Die Nachricht, in der der Name eingetragen und verschlüsselt wurde, lässt sich von E entschlüsseln, da er den privaten Schlüssel hierfür besitzt. Ein Substituieren ist dann problemlos möglich.\\
+\begin{tabular}{|c|c|c|}
+E & 
+$\xlongleftarrow{enc_{k_{E}}^{a}(E, cert_{KAS}, sig_{\hat{k}_{KAS}}(k,n_{2})), E , TGT, enc_{k}^{s}(AK, n_{1}, t_{KAS}, TGS) } $
+ & KAS 
+\end{tabular} 
+\\\\\\
+\begin{tabular}{|c|c|c|}
+C & 
+
+$\xlongleftarrow{enc_{k_{C}}^{a}(C, cert_{KAS}, sig_{\hat{k}_{KAS}}(k,n_{2})), C , TGT, enc_{k}^{s}(AK, n_{1}, t_{KAS}, TGS) } $ & E 
+\end{tabular} 
+
+
+\begin{sidewaystable}[ph!]
 
 \section*{Problem 3: TLS and Randomness}
-\begin{sidewaystable}[ph!]
 	\begin{tabular}{|c|c|c|c|c|}
 		C &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$  & E &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$   & S \\ 
 		
