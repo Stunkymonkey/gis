@@ -95,13 +95,13 @@ $\xlongleftarrow{enc_{k_{C}}^{a}(C, cert_{KAS}, sig_{\hat{k}_{KAS}}(k,n_{2})), C
 	\begin{tabular}{|c|c|c|c|c|}
 		C &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$  & E &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$   & S \\ 
 		
-		C &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{E}(k_{E})}$ & E &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{S}(k_{S})}$ & S \\ 
+		C &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{S}(k_{S})}$ & E &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{S}(k_{S})}$ & S \\ 
 		
-		C &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{E}}(PMS)}$  & E &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS)}$  & S \\ 
+		C &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS)}$  & E &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS)}$  & S \\ 
 		
-		C &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake_{CE}))}$  & E &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake_{ES}))}$  & S \\ 
+		C &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake))}$  & E &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake))}$  & S \\ 
 		
-		C &  $\xlongleftarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake_{EC}))}$ & E &  $\xlongleftarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake_{SE}))}$ & S \\ 
+		C &  $\xlongleftarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake'))}$ & E &  $\xlongleftarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake'))}$ & S \\ 
 		& • &  & • &  \\ 
 		& • &  & • &  \\ 
 		& • &  & • &  \\ 
@@ -109,21 +109,22 @@ $\xlongleftarrow{enc_{k_{C}}^{a}(C, cert_{KAS}, sig_{\hat{k}_{KAS}}(k,n_{2})), C
 	\end{tabular} 
 	\\\\
 	\\
-	\begin{tabular}{|c|c|c|c|c|}
-		C &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$  & E &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$   & S \\ 
+	\begin{tabular}{|c|c|c|}
+		C &  $\xlongrightarrow{\text{(1) Client hello:} TLSVersion_{C},  CipherSuites_{C}, N_{C}}$  & E \\ 
 		
-		C &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{C}(k_{S})}$ & E &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{C}(k_{S})}$ & S \\ 
+		C &  $\xlongleftarrow{\text{(2) Server hello:} TLSVersion_{S},  ChosenCipherSuites_{S}, N_{S}, CERT_{C}(k_{S})}$ & E  \\ 
 		
-		C &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS)}$  & E &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS')}$  & S \\ 
+		C &  $\xlongrightarrow{\text{(3)Client Key Exchange: } enc^{a}_{k_{S}}(PMS)}$  & E \\ 
 		
-		C &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake))}$  & E &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake))}$  & S \\ 
+		C &  $\xlongrightarrow{\text{(4)Client Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake))}$  & E  \\ 
 		
-		C &  $\xlongrightarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake'))}$ & E &  $\xlongrightarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake'))}$ & S \\ 
-		C & • & E & • & S \\ 
-		C & • & E & • & S \\ 
-		C & • & E & • & S \\ 
-		C & \textit{Session beendet} & E & \textit{Session beendet} & S \\ 
-	\end{tabular} 
+		C &  $\xlongrightarrow{\text{(5)Server Finished: } enc_{k}^{auth}(hash(MS, TranscriptOfHandshake'))}$ & E  \\ 
+		C & • & E  \\ 
+		C & • & E \\ 
+\end{tabular} \\\\\\\
+\textbf{Resultat:}\\\
+\\
+Der Angreifer E lässt C hier im Glauben eine Verbindung mit Server S aufgebaut zu haben. Dem ist aber nicht so, der Angreifer kann nun ggf. alte Nachrichten zwischen Server und Client erneut senden. Ein Auslesen der Nachrichten ist ihm aufgrund des geheimen Keys $k$ allerdings nicht möglich.
 \end{sidewaystable}
 \clearpage
 
